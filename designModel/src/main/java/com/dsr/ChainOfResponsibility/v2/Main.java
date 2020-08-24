@@ -1,4 +1,4 @@
-package com.dsr.ChainOfResponsibility;
+package com.dsr.ChainOfResponsibility.v2;
 
 import java.util.LinkedList;
 
@@ -18,7 +18,7 @@ public class Main {
         System.out.println(request.getMsg());
     }
 }
-class FilterChain implements Filter{
+class FilterChain implements Filter {
     LinkedList<Filter> filters=new LinkedList<>();
     public FilterChain addFilter(Filter filter){
         this.filters.add(filter);
@@ -51,16 +51,16 @@ class Response{
     }
 }
 interface  Filter{
-    boolean doFilter(Request request,Response response);
+    boolean doFilter(Request request, Response response);
 }
-class FaceFilter implements Filter{
+class FaceFilter implements Filter {
     @Override
     public boolean doFilter(Request request, Response response) {
         request.setMsg(request.getMsg().replaceAll("<_>","^_^"));
         return true;
     }
 }
-class SensitiveFilter implements Filter{
+class SensitiveFilter implements Filter {
     @Override
     public boolean doFilter(Request request, Response response) {
         request.setMsg(request.getMsg().replaceAll("996", "955"));
