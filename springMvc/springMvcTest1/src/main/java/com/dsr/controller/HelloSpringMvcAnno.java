@@ -34,10 +34,11 @@ public class HelloSpringMvcAnno {
      *      **：匹配多层路径
      *      如果能匹配到多个请求，那么优先精准匹配
      */
-    @RequestMapping(value="/helloAnno" ,method = RequestMethod.GET ,params ={"hi","!h","name=dsr"},headers = {"User-Agent=Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:79.0) Gecko/20100101 Firefox/79.0"})
-    public String hello(Map<String,Object> para){
+    @RequestMapping(value="/helloAnno" ,method = RequestMethod.GET ,params ={"hi","!h","name=dsr"})
+    public String hello(Map<String,Object> para,String name){
         System.out.println(this.getClass().getName());
-        System.out.println(para.get("hi"));
+        System.out.println(para);
+        System.out.println(name);
         para.put("para","Hello SpringMVC-anno");
         return "hello";
     }
