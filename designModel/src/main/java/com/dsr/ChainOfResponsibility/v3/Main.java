@@ -15,9 +15,9 @@ public class Main {
         FilterChain chain=new FilterChain();
         FilterChain chain2=new FilterChain();
         chain2.addFilter(new SensitiveFilter());
-        chain.addFilter(chain2);
         chain.addFilter(new FaceFilter());
-        chain.doFilter(request,response);
+        chain.addFilter(chain2);
+        chain.doFilter(request,response,chain);
         System.out.println(request.getMsg());
     }
 }
@@ -29,11 +29,7 @@ class FilterChain  extends  Filter{
         return this;
     }
     @Override
-    public boolean doFilter(Request request, Response response, FilterChain chain) {
-        return false;
-    }
-    @Override
-    public boolean doFilter(Request request, Response response) {
+    public boolean doFilter(Request request, Response response,FilterChain chain) {
         /*for(Filter filter:filters){
             if(!filter.doFilter(request,response)) return false;
         }*/
@@ -64,17 +60,13 @@ class Response{
 }
 abstract class  Filter{
     abstract  boolean doFilter(Request request, Response response,FilterChain chain);
-    public boolean doFilter(Request request,Response response){
-
-        return true;
-    }
 }
 class FaceFilter extends Filter {
     @Override
     public boolean doFilter(Request request, Response response,FilterChain chain) {
         System.out.println("request---facefilter");
         request.setMsg(request.getMsg().replaceAll("<_>","^_^"));
-        chain.doFilter(request,response);
+        chain.doFilter(request,response,chain);
         System.out.println("response---facefilter");
         return true;
     }
@@ -84,7 +76,7 @@ class SensitiveFilter extends Filter {
     public boolean doFilter(Request request, Response response,FilterChain chain) {
         System.out.println("request---sensitivefilter");
         request.setMsg(request.getMsg().replaceAll("996", "955"));
-        chain.doFilter(request,response);
+        chain.doFilter(request,response,chain);
         System.out.println("response---sensitivefilter");
         return true;
     }
