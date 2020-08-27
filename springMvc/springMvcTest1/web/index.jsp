@@ -10,7 +10,13 @@
   <head>
     <title>$Title$</title>
   </head>
+  <%
+    pageContext.setAttribute("ctp",request.getContextPath());
+  %>
   <body>
-  $END$
+    <form action="${ctp}/helloAnno" method="post" >
+      <input id="hi" type="text"/>
+      <input type="submit" value="提交">
+    </form>
   </body>
 </html>

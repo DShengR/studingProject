@@ -1,12 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
     <!-- 使用XML方式使用SpringMvc-->
-    <!-- 配置Controller的bean-->
+    <!-- 配置Controller的bean 请求路径必须要和id一致 而且必须要写 "/"-->
     <bean id="/helloSpringMvc" class="com.dsr.controller.HelloSpringMvc"></bean>
+    <!-- 配置视图解析器 -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <!-- 页面路径-->
         <property name="prefix" value="/WEB-INF/page/"></property>
+        <!-- 页面后缀名称-->
         <property name="suffix" value=".jsp"></property>
     </bean>
+    <!-- 配置注解扫描包-->
+    <context:component-scan base-package="com.dsr.controller"></context:component-scan>
+
 </beans>
