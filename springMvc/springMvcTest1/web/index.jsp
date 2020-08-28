@@ -14,9 +14,23 @@
     pageContext.setAttribute("ctp",request.getContextPath());
   %>
   <body>
-    <form action="${ctp}/helloAnno" method="post" >
-      <input id="hi" type="text"/>
-      <input type="submit" value="提交">
+    <form action="${ctp}/helloRest" method="post" >
+      <input name="id" type="text"/>
+      <input type="submit" value="新增"/>
+    </form>
+    <form action="${ctp}/helloRest" method="post" >
+      <input name="id" type="text"/>
+      <input type="hidden" name="_method" value="delete"/>
+      <input type="submit" value="删除"/>
+    </form>
+    <form action="${ctp}/helloRest" method="post" >
+      <input name="id" type="text"/>
+      <input type="hidden" name="_method" value="put"/>
+      <input type="submit" value="更新"/>
+    </form>
+    <form action="${ctp}/helloRest" method="get" >
+      <input name="id" type="text"/>
+      <input type="submit" value="查询"/>
     </form>
   </body>
 </html>

@@ -1,6 +1,7 @@
 package com.dsr.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -34,12 +35,24 @@ public class HelloSpringMvcAnno {
      *      **：匹配多层路径
      *      如果能匹配到多个请求，那么优先精准匹配
      */
-    @RequestMapping(value="/helloAnno" ,method = RequestMethod.GET ,params ={"hi","!h","name=dsr"})
-    public String hello(Map<String,Object> para,String name){
+    @RequestMapping(value="helloAnno" ,method = RequestMethod.GET ,params ={"hi","!h","name=dsr"})
+    public String hello(Map<String,Object> para,String name,String hi){
         System.out.println(this.getClass().getName());
-        System.out.println(para);
+        System.out.println(hi);
         System.out.println(name);
         para.put("para","Hello SpringMVC-anno");
+        return "hello";
+    }
+
+    @RequestMapping(value="helloPathVar/{name1}/{hi}/{who}" ,method = RequestMethod.GET )
+    public String helloPathVar(Map<String,Object> para,@PathVariable String name1,@PathVariable(value="hi") String id
+            ,@PathVariable(name="who") String i,@PathVariable String alloNull){
+        System.out.println(this.getClass().getName());
+        System.out.println("id:"+id);
+        System.out.println("name:"+name1);
+        System.out.println("who:"+i);
+        System.out.println("alloNull:"+alloNull);
+        para.put("para","Hello SpringMVC-PathVariable");
         return "hello";
     }
 }

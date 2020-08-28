@@ -14,6 +14,6 @@
         <property name="suffix" value=".jsp"></property>
     </bean>
     <!-- 配置注解扫描包-->
-    <context:component-scan base-package="com.dsr.controller"></context:component-scan>
+    <context:component-scan base-package="com.dsr"></context:component-scan>
 
 </beans>
