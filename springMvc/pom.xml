@@ -13,6 +13,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>springMvcTest1</module>
+        <module>springMvcTest2</module>
     </modules>
 
 
