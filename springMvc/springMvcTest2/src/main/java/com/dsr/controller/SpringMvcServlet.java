@@ -4,13 +4,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.*;
+import java.io.IOException;
 import java.util.Enumeration;
 
 @Controller
 public class SpringMvcServlet {
-    @RequestMapping(value = "/servletApi",method = RequestMethod.POST)
-    public String hello(HttpServletRequest request, HttpServletResponse response, HttpSession session){
+    @RequestMapping(value = "/servletApi")
+    public String hello(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws ServletException, IOException {
         //request操作
         String agent=request.getHeader("USER-AGENT");
         System.out.println(agent);
@@ -29,7 +31,10 @@ public class SpringMvcServlet {
         for(Cookie cookie:cookies1){
             System.out.println("name="+cookie.getName()+",value="+cookie.getValue());
         }
-
+        //request.setAttribute("name", "servlet To jsp");
+        session.setAttribute("name", "session to Jsp");
+        request.getRequestDispatcher("/test").forward(request, response);
+        response.sendRedirect("/test");
         return "success";
     }
     @RequestMapping(value = "/servletApi2",method = RequestMethod.GET,params = {"id=段盛荣"})
