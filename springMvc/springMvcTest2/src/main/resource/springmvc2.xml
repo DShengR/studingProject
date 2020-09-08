@@ -15,4 +15,14 @@
 
     <mvc:default-servlet-handler/>
     <mvc:annotation-driven></mvc:annotation-driven>
+
+    <!-- 自定义类型转换器-->
+    <mvc:annotation-driven conversion-service="conversionService"></mvc:annotation-driven>
+    <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+        <property name="converters">
+            <set>
+                <ref bean="myConverter"/>
+            </set>
+        </property>
+    </bean>
 </beans>

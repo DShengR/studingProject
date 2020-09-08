@@ -1,6 +1,9 @@
 package com.dsr.bean;
 
+import javax.validation.constraints.Null;
+
 public class Address {
+    @Null
     private String Province;
     private String city;
     private String town;

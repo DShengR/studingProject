@@ -26,7 +26,17 @@ public class User {
     @Past
     @DateTimeFormat(pattern = "yyyyMMdd")//Sun Jan 01 00:10:00 CST 1995  Sun Oct 01 00:00:00 CST 1995
     private Date birth;
-    private Address address;
+
+    public User() {
+    }
+
+    public User(String name, Integer age, String gender, String email, Date birth) {
+        this.name = name;
+        this.age = age;
+        this.gender = gender;
+        this.email = email;
+        this.birth = birth;
+    }
 
     public String getName() {
         return name;
@@ -52,13 +62,6 @@ public class User {
         this.gender = gender;
     }
 
-    public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
-    }
 
     public Date getBirth() {
         return birth;
@@ -84,7 +87,6 @@ public class User {
                 ", gender='" + gender + '\'' +
                 ", email='" + email + '\'' +
                 ", birth=" + birth +
-                ", address=" + address +
                 '}';
     }
 }

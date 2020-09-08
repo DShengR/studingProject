@@ -9,9 +9,11 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 @Controller
+@SessionAttributes(types = {String.class,User.class})
 public class ModelAttributeController {
+    private User o1;
     @ModelAttribute
-    public void modelAttr1(Model model){
+    public void modelAttr1(Model model,String str){
         System.out.println("modelAttribute1------");
         model.addAttribute("myName", "duan sheng rong");
     }
@@ -21,7 +23,7 @@ public class ModelAttributeController {
         return "success";
     }
 
-    @ModelAttribute
+  @ModelAttribute
     public void modelAttr2(Model model){
         System.out.println("modelAttr2------");
         User user=new User();
@@ -29,13 +31,15 @@ public class ModelAttributeController {
         user.setAge(12);
         user.setGender("男");
         model.addAttribute("user", user);
+        o1=user;
     }
     @RequestMapping("/helloModelAttr2")
-    public String  helloModelAttr2( @ModelAttribute("u") User user1){
-        System.out.println(user1.toString());
+    public String  helloModelAttr2( @ModelAttribute("user") User user){
+        System.out.println(o1==user);
+        System.out.println(user.toString());
        return "success";
     }
-    @ModelAttribute("u")
+    //@ModelAttribute("u")
     public User modelAttr3(){
         System.out.println("modelAttr3------");
         User user=new User();
