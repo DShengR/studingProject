@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        https://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/aop
+        https://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd"
+>
+
+    <context:component-scan base-package="com.dsr.testspring">
+<!--        <context:include-filter type="assignable" expression="com.dsr.testspring.aspect.LogUtil"/>
+        <context:include-filter type="assignable" expression="com.dsr.testspring.aspect.SecurityUtil"/>
+
+        <context:include-filter type="assignable" expression="com.dsr.testspring.dao.impl.AddressDaoImpl"/>
+        <context:include-filter type="assignable" expression="com.dsr.testspring.dao.impl.PersonDaoImpl"/>-->
+        <!--        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service"/>-->
+    </context:component-scan>
+    <aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+    <bean id="logUtil" class="com.dsr.testspring.aspect.LogUtil"></bean>
+    <bean id="securityUtil" class="com.dsr.testspring.aspect.SecurityUtil"></bean>
+    <!-- 基于xml的aop配置-->
+    <aop:config>
+        <aop:pointcut id="globalPointCut" expression="execution(* com.dsr..*(..))"/>
+        <aop:aspect id="logAop" ref="logUtil" order="1">
+            <aop:pointcut id="logPointCut" expression="execution(* com.dsr.testspring.anno.service.BookService.*(..))"/>
+<!--            <aop:before method="start" pointcut-ref="globalPointCut"></aop:before>
+            <aop:after method="finall" pointcut-ref="globalPointCut"></aop:after>
+            <aop:after-throwing method="exception" pointcut-ref="globalPointCut" throwing="e"></aop:after-throwing>
+            <aop:after-returning method="stop" pointcut-ref="globalPointCut" returning="result"></aop:after-returning>-->
+            <aop:around method="around" pointcut-ref="logPointCut"></aop:around>
+        </aop:aspect>
+        <aop:aspect id="securityUtil" ref="securityUtil" order="2">
+            <aop:pointcut id="securityPointCut" expression="execution(* com.dsr.testspring.anno.service.PersonService.*(..))"/>
+            <aop:before method="start" pointcut-ref="securityPointCut"></aop:before>
+            <aop:after method="finall" pointcut-ref="securityPointCut" ></aop:after>
+            <aop:after-throwing method="exception" pointcut-ref="securityPointCut" throwing="e"></aop:after-throwing>
+            <aop:after-returning method="stop" pointcut-ref="securityPointCut" returning="result"></aop:after-returning>
+            <aop:around method="around" pointcut-ref="securityPointCut"></aop:around>
+        </aop:aspect>
+    </aop:config>
+
+    <context:property-placeholder location="dbConfig.properties"></context:property-placeholder>
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="username" value="${jdbc.username}"></property>
+        <property name="password" value="${jdbc.password}"></property>
+        <property name="url" value="${jdbc.url}"></property>
+        <property name="driverClassName" value="${jdbc.driver}"></property>
+    </bean>
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
+
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
+    <tx:annotation-driven transaction-manager="transactionManager"></tx:annotation-driven>
+
+</beans>

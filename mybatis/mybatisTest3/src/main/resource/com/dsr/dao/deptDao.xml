@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dsr.dao.DeptDao">
+
+    <resultMap id="deptResultMap" type="dept">
+        <id property="deptno" column="deptno"/>
+        <result property="dname" column="dname"/>
+        <result property="loc" column="loc"/>
+        <collection property="emps" ofType="emp">
+            <id property="empno" column="empno"></id>
+            <result property="job" column="job"/>
+            <result property="mgr" column="mgr"/>
+            <result property="hiredate" column="hiredate"/>
+            <result property="sal" column="sal"/>
+            <result property="comm" column="comm"/>
+        </collection>
+    </resultMap>
+
+    <select id="getDeptById" resultType="dept" resultMap="deptResultMap">
+        select * from dept
+        <where>
+            <if test="deptno != null">
+                deptno=#{deptno}
+            </if>
+            <if test="dname != null">
+                and dname=#{dname}
+            </if>
+            <if test="loc != null">
+                and loc=#{loc}
+            </if>
+        </where>
+    </select>
+
+    <select id="getDeptById2" resultType="dept" resultMap="deptResultMap">
+        select * from dept
+        <trim prefix="where" prefixOverrides="and|or" suffix="" suffixOverrides="and|or" >
+            <if test="deptno != null">
+               and deptno=#{deptno}
+            </if>
+            <if test="dname != null">
+                or dname=#{dname} or
+            </if>
+            <if test="loc != null">
+                or loc=#{loc}
+            </if>
+        </trim>
+    </select>
+
+    <select id="selectDeptById3" resultMap="deptResultMap">
+        select * from dept where deptno in
+        <foreach collection="deptnos" index="i"  item="item" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+    </select>
+
+    <select id="selectDeptById4" resultMap="deptResultMap">
+        select * from dept
+        <where>
+            <choose>
+                <when test="deptno != null">
+                    and deptno =#{deptno}
+                </when>
+                <when test="dname !=null">
+                    and dname=#{dname}
+                </when>
+                <otherwise>
+                    and loc=#{loc}
+                </otherwise>
+            </choose>
+        </where>
+    </select>
+
+    <insert id="saveDept">
+        insert into dept(deptno,dname,loc) values(#{deptno},#{dname},#{loc})
+    </insert>
+    <update id="updateDept">
+        update dept
+        <set>
+            <if test="dname !=null">
+                dname=#{dname}
+            </if>
+            <if test="loc !=null">
+                loc=#{loc}
+            </if>
+        </set>
+        <where>
+            <if test="deptno !=null">
+                deptno=#{deptno}
+            </if>
+        </where>
+    </update>
+
+    <!-- 缓存配置-->
+    <cache eviction="" flushInterval="" size="" readOnly=""></cache>
+</mapper>

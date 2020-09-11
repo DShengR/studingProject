@@ -1,7 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="Encoding">
+  <component name="Encoding" defaultCharsetForPropertiesFiles="UTF-8">
     <file url="file://$PROJECT_DIR$/designModel" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mybatis" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mybatis/mybatisGenerator" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mybatis/mybatisTest1" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mybatis/mybatisTest2" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mybatis/mybatisTest3" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/spring" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/spring/SpringTest" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/springMvc/springMvcTest1" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/springMvc/springMvcTest2" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/springMvc/springMvcTest3" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ssm" charset="UTF-8" />
+    <file url="PROJECT" charset="UTF-8" />
   </component>
 </project>

@@ -11,6 +11,9 @@
     <modules>
         <module>designModel</module>
         <module>springMvc</module>
+        <module>mybatis</module>
+        <module>ssm</module>
+        <module>spring</module>
     </modules>
 
 

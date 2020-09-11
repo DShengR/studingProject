@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="person" class="com.dsr.testspring.bean.Person">
+        <property name="name" value="duanshengrong">
+        </property>
+        <property name="age" value="25"/>
+        <property name="sex" value="男"/>
+        <property name="telNo" value="133333333333"/>
+    </bean>
+    <bean id="person1" class="com.dsr.testspring.bean.Person">
+        <constructor-arg name="name" value="dsr"></constructor-arg>
+        <constructor-arg name="age" value="25"></constructor-arg>
+        <constructor-arg name="sex" value="男"></constructor-arg>
+        <constructor-arg name="telNo" value="13333333333333"></constructor-arg>
+    </bean>
+
+    <bean id="person2" class="com.dsr.testspring.bean.Person">
+        <constructor-arg  value="25" index="1" type=""></constructor-arg>
+        <constructor-arg value="dsr" index="0"></constructor-arg>
+        <constructor-arg  value="13333333333333" index="3"></constructor-arg>
+        <constructor-arg  value="男" index="2"></constructor-arg>
+    </bean>
+
+    <bean id="person5" class="com.dsr.testspring.bean.Person" scope="prototype">
+        <property name="name" value="duanshengrong"></property>
+        <property name="age" value="25"/>
+        <property name="sex" value="男"/>
+        <property name="telNo" value="133333333333"/>
+        <!--为数组赋值 -->
+      <!--  <property name="hobbies" value="money,women"/>-->
+        <property name="hobbies">
+            <array>
+                <value>money</value>
+                <value>women</value>
+            </array>
+        </property>
+        <!-- 为引用对象赋值  外部bean-->
+       <!-- <property name="addres" ref="address"></property>-->
+        <!-- 为引用对象赋值  内部bean-->
+        <property name="address1" >
+            <bean id="address" class="com.dsr.testspring.bean.Address"/>
+        </property>
+        <!--为list赋值，List<Address> -->
+        <property name="lists">
+            <list>
+                <!-- 内部bean方式-->
+                <bean id="address1" class="com.dsr.testspring.bean.Address">
+                    <property name="id" value="2"/>
+                    <property name="country" value="中国"/>
+                    <property name="province" value="北京"/>
+                </bean>
+                <bean id="address2" class="com.dsr.testspring.bean.Address">
+                    <property name="id" value="3"/>
+                    <property name="country" value="中国"/>
+                    <property name="province" value="上海"/>
+                </bean>
+                <!-- 外部bean方式-->
+                <ref bean="address"/>
+            </list>
+        </property>
+        <!-- 为set赋值-->
+       <!-- <property name="sets" value="1,2,1"/> -->
+        <property name="sets">
+            <set>
+                <bean id="address" class="com.dsr.testspring.bean.Address"/>
+                <ref bean="address"/>
+            </set>
+        </property>
+        <!-- 为map赋值-->
+        <property name="maps" >
+            <map>
+                <entry key="k1" value-ref="address"></entry>
+            </map>
+        </property>
+    </bean>
+    <bean id="address1" class="com.dsr.testspring.bean.Address">
+        <property name="id" value="1"></property>
+        <property name="country" value="中国"/>
+        <property name="province" value="甘肃"/>
+    </bean>
+ <!--   <bean id="address2" class="com.dsr.testspring.bean.Address">
+        <property name="id" value="1"></property>
+        <property name="country" value="中国"/>
+        <property name="province" value="四川"/>
+    </bean>-->
+    <bean id="parent" class="com.dsr.testspring.bean.Person" abstract="true">
+        <property name="name" value="duanshengrong">
+        </property>
+        <property name="age" value="25"/>
+        <property name="sex" value="男"/>
+        <property name="telNo" value="133333333333"/>
+    </bean>
+    <bean id="son" class="com.dsr.testspring.bean.Person" parent="parent">
+        <property name="name" value="dshengr"/>
+    </bean>
+    <bean id="person7" class="com.dsr.testspring.bean.Person" scope="prototype"></bean>
+
+    <!-- 通过静态工厂创建bean-->
+    <bean id="personStatic" class="com.dsr.testspring.factory.PersonStaticFactory" factory-method="getInstance"></bean>
+    <!-- 通过实例工厂创建bean -->
+    <bean id="personInst" class="com.dsr.testspring.bean.Person" factory-bean="instanceFactory" factory-method="getInstance"></bean>
+    <bean id="instanceFactory" class="com.dsr.testspring.factory.PersonInstanceFactory"></bean>
+
+    <!-- 通过FactoryBean创建对象-->
+    <bean id="personFactoryBean" class="com.dsr.testspring.factory.PersonFactoryBean"></bean>
+
+    <!-- bean init destory-->
+    <bean id="personScope" class="com.dsr.testspring.bean.Person" init-method="init" destroy-method="destory"></bean>
+
+    <!--<bean id="beanPostProcesser" class="com.dsr.testspring.factory.MyBeanPostProcesser"></bean>-->
+
+    <bean id="autoWirePerson" class="com.dsr.testspring.bean.Person" autowire="byName"></bean>
+
+
+
+
+    <bean id="personSpel" class="com.dsr.testspring.bean.Person" scope="prototype">
+        <property name="name" value="#{address1.country}"></property>
+        <property name="age" value="#{5*5}"/>
+        <property name="sex" value="#{new String(1)}"/>
+        <property name="telNo" value="#{T(java.util.UUID).randomUUID().toString()}"/>
+    </bean>
+</beans>

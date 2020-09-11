@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+
+    <properties resource="dbConfig.properties">
+        <property name="test1" value="test1"/>
+        <property name="test2" value="test2"/>
+    </properties>
+
+    <environments default="development">
+        <!--id:表示不同环境的名称-->
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <!--配置数据库连接-->
+            <dataSource type="POOLED">
+                <!--使用${}来引入外部变量-->
+                <property name="driver" value="${jdbc.driver}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.username}"/>
+                <property name="password" value="${jdbc.password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+</configuration>

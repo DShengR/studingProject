@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dsr.dao.EmpDao">
+    <insert id="saveEmp" parameterType="emp" flushCache="true" timeout="10" statementType="PREPARED"
+            useGeneratedKeys="true" keyProperty=""></insert>
+
+    <select id="getEmpById" resultType="emp">
+        select * from emp where empno=#{enpno}
+    </select>
+    <select id="getEmpById2" resultType="emp">
+        select * from ${arg0} where empno=#{arg1}
+    </select>
+    <select id="getEmpByIdAndSal" resultType="Emp">
+        select * from emp where empno=#{empno} and sal=#{sal}
+    </select>
+    <select id="getEmpByMap" resultType="Emp">
+        select * from emp where empno=#{empno} and sal=#{sal}
+    </select>
+
+    <select id="getAllEmps" resultType="list">
+        select * from emp;
+    </select>
+    
+    <select id="getEmpMapById" resultType="map">
+        select * from emp where empno=#{empno};
+    </select>
+
+    <select id="getAllEmp" resultType="emp">
+        select * from emp
+    </select>
+
+    <select id="getEmpAndDept" resultType="emp" resultMap="empResultMap">
+        select * from emp e,dept d where e.deptno=d.deptno and e.empno=#{empno}
+    </select>
+
+    <resultMap id="empResultMap" type="emp">
+        <!-- 指定构造方法来实例化对象-->
+<!--        <constructor>
+            &lt;!&ndash;主键字段 &ndash;&gt;
+            <idArg column="" javaType=""></idArg>
+            &lt;!&ndash;普通字段 &ndash;&gt;
+            <arg column="" javaType=""></arg>
+        </constructor>-->
+        <!--表示一对一关系 -->
+        <association property="dept" javaType="dept">
+            <id property="deptno" column="deptno"/>
+            <result property="dname" column="dname"/>
+            <result property="loc" column="loc"/>
+        </association>
+        <!--表示一对多关系
+        <collection property=""></collection>-->
+    </resultMap>
+
+    <select id="getEmpBySetp" resultType="emp" resultMap="empResultStep">
+        select * from emp where empno=#{empno}
+    </select>
+
+    <resultMap id="empResultStep" type="emp">
+        <id property="empno" column="empno"></id>
+        <result property="ename" column="ename"/>
+        <result property="job" column="job"/>
+        <result property="mgr" column="mgr"/>
+        <result property="hiredate" column="hiredate"/>
+        <result property="sal" column="sal"/>
+        <result property="comm" column="comm"/>
+        <association property="dept" select="com.dsr.dao.DeptDao.getDeptById" column="deptno"></association>
+    </resultMap>
+
+    <select id="getEmpBydeptNo" resultType="emp">
+        select * from emp where deptno=#{deptno}
+    </select>
+</mapper>

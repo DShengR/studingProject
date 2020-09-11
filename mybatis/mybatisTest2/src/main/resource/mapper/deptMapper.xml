@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dsr.dao.DeptDao">
+
+    <resultMap id="deptResultMap" type="dept">
+        <id property="deptno" column="deptno"/>
+        <result property="dname" column="dname"/>
+        <result property="loc" column="loc"/>
+        <collection property="emps" ofType="emp">
+            <id property="empno" column="empno"></id>
+            <result property="job" column="job"/>
+            <result property="mgr" column="mgr"/>
+            <result property="hiredate" column="hiredate"/>
+            <result property="sal" column="sal"/>
+            <result property="comm" column="comm"/>
+        </collection>
+    </resultMap>
+
+    <select id="getDeptById" resultType="dept" resultMap="deptResultMap">
+        select * from dept d,emp e where d.deptno=e.deptno and d.deptno=#{deptno}
+    </select>
+
+    <select id="getDeptByStep" resultMap="deptResultStep">
+        select * from dept where deptno=#{deptno}
+    </select>
+    <resultMap id="deptResultStep" type="dept">
+        <id property="deptno" column="deptno"></id>
+        <result property="dname" column="dname"/>
+        <result property="loc" column="loc"/>
+        <collection property="emps" ofType="emp" select="com.dsr.dao.EmpDao.getEmpBydeptNo" column="deptno" fetchType="eager" />
+    </resultMap>
+</mapper>
