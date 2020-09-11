@@ -13,6 +13,7 @@
       <module>mybatisTest2</module>
       <module>mybatisTest3</module>
       <module>mybatisGenerator</module>
+      <module>mybatis_plus_helloworld</module>
   </modules>
 
   <name>mybatis</name>
