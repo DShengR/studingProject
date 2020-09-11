@@ -17,7 +17,7 @@
     </bean>
 
     <bean id="person2" class="com.dsr.testspring.bean.Person">
-        <constructor-arg  value="25" index="1" type=""></constructor-arg>
+        <constructor-arg  value="25" index="1" ></constructor-arg>
         <constructor-arg value="dsr" index="0"></constructor-arg>
         <constructor-arg  value="13333333333333" index="3"></constructor-arg>
         <constructor-arg  value="男" index="2"></constructor-arg>
