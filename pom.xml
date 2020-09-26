@@ -14,6 +14,7 @@
         <module>mybatis</module>
         <module>ssm</module>
         <module>spring</module>
+        <module>springBoot</module>
     </modules>
 
 

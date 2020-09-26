@@ -113,9 +113,6 @@
 
     <bean id="autoWirePerson" class="com.dsr.testspring.bean.Person" autowire="byName"></bean>
 
-
-
-
     <bean id="personSpel" class="com.dsr.testspring.bean.Person" scope="prototype">
         <property name="name" value="#{address1.country}"></property>
         <property name="age" value="#{5*5}"/>

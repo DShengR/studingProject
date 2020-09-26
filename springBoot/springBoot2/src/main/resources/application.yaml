@@ -1,0 +1,15 @@
+server:
+  port: 8081
+spring:
+  main:
+    banner-mode: console
+  profiles:
+    active: dev
+person:
+  last-name: dsr
+  sex: 男
+  age: 25
+  likes:
+    - money
+    - girls
+    - study

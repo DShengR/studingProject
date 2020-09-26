@@ -9,6 +9,10 @@
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/../SpringTest/pom.xml" />
+        <option value="$PROJECT_DIR$/../java/javaframework/mybatis/06mybatis-plus2/mybatis_plus_helloworld/pom.xml" />
+        <option value="$PROJECT_DIR$/springBoot/springBoot_helloword/pom.xml" />
+        <option value="$PROJECT_DIR$/springBoot/springBoot2/pom.xml" />
+        <option value="$PROJECT_DIR$/springBoot/spingboot_web/pom.xml" />
       </list>
     </option>
   </component>

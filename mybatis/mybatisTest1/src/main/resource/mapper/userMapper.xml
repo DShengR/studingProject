@@ -6,4 +6,13 @@
     <select id="getUserById" resultType="com.dsr.bean.User">
     select * from Users where id = #{id}
   </select>
+
+    <resultMap id="resultMap" type="com.dsr.bean.User">
+        <id property="id" column="id"></id>
+    </resultMap>
+
+    <insert id="saveUser" useGeneratedKeys="true" keyProperty="id" >
+        insert into users(username,user_age,usersex) values(#{name},#{sex},#{age})
+    </insert>
+    <cache/>
 </mapper>

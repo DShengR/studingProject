@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="SizeOfAgent">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/jvm/SizeOfAgent.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

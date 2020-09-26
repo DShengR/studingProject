@@ -13,8 +13,13 @@
         <property name="suffix" value=".jsp"></property>
     </bean>
 
+<!--
     <mvc:default-servlet-handler/>
-    <mvc:annotation-driven></mvc:annotation-driven>
+-->
+
+    <mvc:resources mapping="/images/*" location="/images/"/>
+
+<!--    <mvc:annotation-driven></mvc:annotation-driven>-->
 
     <!-- 自定义类型转换器-->
     <mvc:annotation-driven conversion-service="conversionService"></mvc:annotation-driven>

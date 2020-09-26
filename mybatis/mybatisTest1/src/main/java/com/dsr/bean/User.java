@@ -4,13 +4,14 @@ public class User {
     private Integer id;
     private String name;
     private String sex;
-    private String age;
+    private Integer age;
 
-    public User(Integer id, String name, String sex, String aage) {
+    public User(){}
+    public User(Integer id, String name, String sex, Integer age) {
         this.id = id;
         this.name = name;
         this.sex = sex;
-        this.age = aage;
+        this.age = age;
     }
 
     public Integer getId() {
@@ -37,12 +38,12 @@ public class User {
         this.sex = sex;
     }
 
-    public String getAge() {
+    public Integer getAge() {
         return age;
     }
 
-    public void setAAge(String aage) {
-        this.age = aage;
+    public void setAge(Integer age) {
+        this.age = age;
     }
 
     @Override

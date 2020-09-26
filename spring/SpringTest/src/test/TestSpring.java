@@ -25,8 +25,9 @@ public class TestSpring {
     public void test01(){
 
         Person person = (Person) context.getBean("person");
+
         Person person1 = context.getBean("person", Person.class);
-        System.out.println(person);
+        System.out.println(person.getClass().getName());
 
         Person bean2 = context.getBean("person2",Person.class);
         System.out.println(bean2);
