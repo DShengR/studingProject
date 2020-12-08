@@ -107,8 +107,8 @@ public class BinaryTree<T> {
                 node=node.leftNode;
             }else{
                 node=stack.pop();
-                System.out.println(node.value+" ");
-                stack.push(node.rightNode);
+                System.out.print(node.value+" ");
+                node=node.rightNode;
             }
         }
         System.out.println();
@@ -242,7 +242,8 @@ public class BinaryTree<T> {
 
     public static void main(String[] args) {
         BinaryTree<Integer> tree=new BinaryTree<>((a,b)->a-b);
-        int[] arr={ 5, 2, 9, 1, 3, 6, 12, 4, 5 };
+       // int[] arr={ 5, 2, 9, 1, 3, 6, 12, 4, 5 };
+        int[] arr={8,9,6,2,5,11,45,32};
         for(int a: arr){
             tree.add(a);
         }
@@ -250,21 +251,21 @@ public class BinaryTree<T> {
         tree.preOrder(tree.getRoot());
         System.out.println();
         System.out.println("------非递归先序-------");
-        tree.preOrder(tree.getRoot());
+        tree.preOrder2(tree.getRoot());
         System.out.println();
 
         System.out.println("------递归中序-------");
         tree.midOrder(tree.getRoot());
         System.out.println();
         System.out.println("------非递归中序-------");
-        tree.midOrder(tree.getRoot());
+        tree.midOrder2(tree.getRoot());
         System.out.println();
 
         System.out.println("------递归后序-------");
         tree.afterOrder(tree.getRoot());
         System.out.println();
         System.out.println("------非递归后序-------");
-        tree.afterOrder(tree.getRoot());
+        tree.afterOrder2(tree.getRoot());
         System.out.println();
 
         System.out.println("------宽度优先遍历-------");

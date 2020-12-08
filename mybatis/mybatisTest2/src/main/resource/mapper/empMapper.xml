@@ -72,4 +72,5 @@
     <select id="getEmpBydeptNo" resultType="emp">
         select * from emp where deptno=#{deptno}
     </select>
+    <cache readOnly="true"/>
 </mapper>

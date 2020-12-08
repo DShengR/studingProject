@@ -2,7 +2,8 @@ package com.dsr.day4;
 
 public class HeapSort {
     public static void main(String[] args) {
-        int[] arr=new int[]{8,7,9,6,2,5,11,45,32,11,0,44,2};
+        //int[] arr=new int[]{8,7,9,6,2,5,11,45,32,11,0,44,2};
+        int[] arr=new int[]{8,7,9,6,12,5,11};
         heapSort(arr);
         for(int a: arr){
             System.out.println(a);

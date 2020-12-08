@@ -18,7 +18,6 @@ import java.util.Arrays;
 import java.util.concurrent.ArrayBlockingQueue;
 
 @SpringBootApplication
-//@ServletComponentScan(basePackages = "com.dsr")
 public class SpingBootWebApplication {
 
 	public static void main(String[] args) {
@@ -26,12 +25,8 @@ public class SpingBootWebApplication {
 	}
 	@Bean
 	public ServletRegistrationBean<MyServlet> getServletRegistrationBean(){
-		ServletRegistrationBean<MyServlet> bean=new ServletRegistrationBean<>();
-		bean.setServlet(new MyServlet());
+		ServletRegistrationBean<MyServlet> bean=new ServletRegistrationBean<>(new MyServlet(),"/servlet");
 		bean.setLoadOnStartup(1);
-		ArrayList list=new ArrayList();
-		list.add("/servlet");
-		bean.setUrlMappings(list);
 		return bean;
 	}
 	@Bean

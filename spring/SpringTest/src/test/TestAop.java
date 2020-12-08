@@ -2,6 +2,7 @@ package test;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import com.dsr.testspring.anno.service.BookService;
+import com.dsr.testspring.anno.service.MultiService;
 import com.dsr.testspring.dao.BaseDao;
 import com.dsr.testspring.dao.impl.PersonDaoImpl;
 import com.dsr.testspring.proxy.MyProxy;
@@ -11,6 +12,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
+import java.awt.print.Book;
 import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.List;
@@ -71,9 +73,19 @@ public class TestAop {
         DataSourceTransactionManager transactionManager = context.getBean("transactionManager", DataSourceTransactionManager.class);
     }
     @Test
-    public void testTx2() throws FileNotFoundException {
+    public void testTx2() throws FileNotFoundException, InterruptedException {
         ApplicationContext context=new ClassPathXmlApplicationContext("aop.xml");
         BookService bookService = context.getBean("bookService", BookService.class);
         bookService.checkout("lisi", 1);
     }
+
+    @Test
+    public void testTx3() throws FileNotFoundException, InterruptedException {
+        ApplicationContext context=new ClassPathXmlApplicationContext("aop.xml");
+        BookService service=context.getBean("bookService",BookService.class);
+        //service.checkout("lisi", 3);
+        MultiService multiService = context.getBean("multiService", MultiService.class);
+        multiService.mulTx();
+    }
 }
+

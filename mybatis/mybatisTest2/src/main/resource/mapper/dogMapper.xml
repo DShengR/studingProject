@@ -12,4 +12,5 @@
     <select id="getDogById" resultType="com.dsr.bean.Dog" resultMap="dogMap">
         select * from dog where id=#{id};
     </select>
+    <cache-ref namespace="com.dsr.dao.EmpDao"/>
 </mapper>

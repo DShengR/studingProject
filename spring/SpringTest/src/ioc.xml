@@ -2,7 +2,7 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-    <bean id="person" class="com.dsr.testspring.bean.Person">
+    <bean id="person" class="com.dsr.testspring.bean.Person" scope="prototype">
         <property name="name" value="duanshengrong">
         </property>
         <property name="age" value="25"/>
@@ -109,11 +109,11 @@
     <!-- bean init destory-->
     <bean id="personScope" class="com.dsr.testspring.bean.Person" init-method="init" destroy-method="destory"></bean>
 
-    <!--<bean id="beanPostProcesser" class="com.dsr.testspring.factory.MyBeanPostProcesser"></bean>-->
+    <bean id="beanPostProcesser" class="com.dsr.testspring.factory.MyBeanPostProcesser"></bean>
 
     <bean id="autoWirePerson" class="com.dsr.testspring.bean.Person" autowire="byName"></bean>
 
-    <bean id="personSpel" class="com.dsr.testspring.bean.Person" scope="prototype">
+    <bean id="personSpel" class="com.dsr.testspring.bean.Person" scope="prototype" depends-on="">
         <property name="name" value="#{address1.country}"></property>
         <property name="age" value="#{5*5}"/>
         <property name="sex" value="#{new String(1)}"/>

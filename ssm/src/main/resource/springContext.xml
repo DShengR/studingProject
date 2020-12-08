@@ -20,8 +20,7 @@
     <!--数据源配置-->
     <context:property-placeholder location="classpath:dbConfig.properties"/>
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
-        <property name="driverClassName" value="${jdbc.driver}">
-        </property>
+        <property name="driverClassName" value="${jdbc.driver}"></property>
         <property name="url" value="${jdbc.url}"/>
         <property name="username" value="${jdbc.username}"/>
         <property name="password" value="${jdbc.password}"/>
@@ -53,5 +52,13 @@
     </bean>
     <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
         <constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"></constructor-arg>
+    </bean>
+    <!--配置redis-->
+    <bean id="redisConnectionFactory" class="org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory" >
+        <constructor-arg name="host" value="$(redis.host)"/>
+        <constructor-arg name="port" value="${redis_port}"/>
+    </bean>
+    <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
+        <property name="connectionFactory" ref="redisConnectionFactory"></property>
     </bean>
 </beans>

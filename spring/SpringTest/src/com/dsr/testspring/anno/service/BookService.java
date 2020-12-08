@@ -25,10 +25,23 @@ public class BookService {
     //@Transactional(rollbackForClassName = {"java.io.FileNotFoundException"})
     //@Transactional(readOnly = true)
    // @Transactional( isolation=Isolation.SERIALIZABLE )
-    @Transactional(propagation = Propagation.REQUIRED)
-    public void checkout(String username,int id) throws FileNotFoundException {
+    @Transactional(timeout = 3,readOnly = false,propagation =Propagation.REQUIRED )
+    public void checkout(String username,int id) {
         bookDao.updateStock(id);
+        //Thread.sleep(3000);
         int price = bookDao.getPrice(id);
+        System.out.println(price);
         bookDao.updateBalance(username,price);
+    }
+    @Transactional(propagation = Propagation.NESTED)
+    public void updatePrice(int id,int price){
+        try{
+            int i=1/0;
+            bookDao.updatePrice(id,price);
+
+        }catch (Exception e){
+
+        }
+
     }
 }

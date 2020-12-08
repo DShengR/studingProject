@@ -18,6 +18,7 @@
         </collection>
     </resultMap>
 
+    <cache />
     <select id="getDeptById" resultType="dept" resultMap="deptResultMap">
         select * from dept d,emp e where d.deptno=e.deptno and d.deptno=#{deptno}
     </select>
@@ -31,4 +32,5 @@
         <result property="loc" column="loc"/>
         <collection property="emps" ofType="emp" select="com.dsr.dao.EmpDao.getEmpBydeptNo" column="deptno" fetchType="eager" />
     </resultMap>
+
 </mapper>

@@ -10,6 +10,7 @@ import com.dsr.testspring.factory.PersonFactoryBean;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.util.HashMap;
@@ -19,7 +20,17 @@ public class TestSpring {
     ApplicationContext context;
     @Before
     public void beforeSpring(){
-        context=new ClassPathXmlApplicationContext(new String[]{"ioc.xml","IOC-anno.xml","aop.xml"});
+        //context=new ClassPathXmlApplicationContext(new String[]{"ioc.xml","IOC-anno.xml","aop.xml"});
+        context=new ClassPathXmlApplicationContext("IOC-anno.xml");
+    }
+    @Test
+    public void test(){
+        Object a = context.getBean("a");
+        Object b = context.getBean("b");
+        Object c = context.getBean("c");
+        System.out.println(a);
+       // System.out.println(b);
+        //System.out.println(c);
     }
     @Test
     public void test01(){

@@ -1,5 +1,6 @@
 package com.dsr.controller;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Controller;
@@ -10,6 +11,7 @@ import java.util.Map;
 
 @Controller
 public class EntityController {
+    private int age;
     @RequestMapping("/httpEntity")
     public String httpEntity(HttpEntity<Object> httpEntity){
         Object body = httpEntity.getBody();

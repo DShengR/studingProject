@@ -13,11 +13,13 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet(urlPatterns = "/servlet3.0")
+@WebServlet(urlPatterns = "/servlet")
 public class MyServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doGet(req, resp);
+        //super.doGet(req, resp);
+        req.getSession();
+        req.getCookies();
         PrintWriter writer = resp.getWriter();
         writer.write("总共请求次数："+ MyListener.totalRequest );
         writer.close();

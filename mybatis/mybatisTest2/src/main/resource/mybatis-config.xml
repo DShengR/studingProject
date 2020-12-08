@@ -12,9 +12,8 @@
     <settings>
         <setting name="mapUnderscoreToCamelCase" value="true"/>
         <!--全局延迟加载，开启之后所有的关联对象都会延迟加载，只有使用的时候才去加载 -->
-<!--
+
         <setting name="lazyLoadingEnabled" value="true"/>
--->
     </settings>
     <typeAliases>
         <typeAlias type="com.dsr.bean.Emp" alias="emp"></typeAlias>

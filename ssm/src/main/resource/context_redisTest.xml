@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        https://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/aop
+        https://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/tx
+        https://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <!--配置redis-->
+    <context:property-placeholder location="classpath:dbConfig.properties"/>
+    <bean id="redisSentinelConfig" class="org.springframework.data.redis.connection.RedisSentinelConfiguration">
+        <property name="master">
+            <bean id="nameMaster" class="org.springframework.data.redis.connection.RedisNode">
+                <property name="name" value="shard002"/>
+            </bean>
+        </property>
+        <property name="sentinels">
+            <set>
+                <bean class="org.springframework.data.redis.connection.RedisNode">
+                    <constructor-arg name="host" value="${redis_sentinel.node1.ip}"/>
+                    <constructor-arg name="port" value="${redis.sentinel.node1.port}" />
+                </bean>
+                <bean class="org.springframework.data.redis.connection.RedisNode">
+                    <constructor-arg name="host" value="${redis.sentinel.node2.ip}"/>
+                    <constructor-arg name="port" value="${redis.sentinel.node2.port}" />
+                </bean>
+                <bean class="org.springframework.data.redis.connection.RedisNode">
+                    <constructor-arg name="host" value="${redis.sentinel.node3.ip}"/>
+                    <constructor-arg name="port" value="${redis.sentinel.node3.port}" />
+                </bean>
+            </set>
+        </property>
+    </bean>
+    <bean id="redisConnectionFactory" class="org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory" >
+<!--        <constructor-arg name="host" value="${redis_host}"/>
+        <constructor-arg name="port" value="${redis_port}"/>-->
+        <constructor-arg name="sentinelConfiguration" ref="redisSentinelConfig"/>
+    </bean>
+    <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
+        <property name="connectionFactory" ref="redisConnectionFactory"></property>
+    </bean>
+    <bean id="stringRedisTemplate" class="org.springframework.data.redis.core.StringRedisTemplate">
+        <property name="connectionFactory" ref="redisConnectionFactory"/>
+    </bean>
+    
+    <bean id="defaultWatcher" class="com.dsr.zookeeper.DefaultWatcher"></bean>
+    <bean id="zookeeper" class="org.apache.zookeeper.ZooKeeper">
+        <constructor-arg index="0" value="${zookeeper}"/>
+        <constructor-arg index="1" value="3000"/>
+        <constructor-arg index="2" ref="defaultWatcher"/>
+    </bean>
+</beans>
