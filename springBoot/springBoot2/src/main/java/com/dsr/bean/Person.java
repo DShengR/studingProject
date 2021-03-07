@@ -5,26 +5,27 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+
 @Component
 @ConfigurationProperties(prefix = "person")
 public class Person {
-   // @Value("${person.name}")
+    // @Value("${person.name}")
     private String lastName;
-   // @Value("${person.sex}")
+    // @Value("${person.sex}")
     private String sex;
-   // @Value("${person.age}")
+    // @Value("${person.age}")
     private Integer age;
-  //  @Value("${person.likes}")
+    //  @Value("${person.likes}")
     private List<String> likes;
 
     public Person() {
     }
 
-    public Person(String name,String sex,Integer age,List<String> list) {
-        this.lastName=name;
-        this.age=age;
-        this.sex=sex;
-        this.likes=list;
+    public Person(String name, String sex, Integer age, List<String> list) {
+        this.lastName = name;
+        this.age = age;
+        this.sex = sex;
+        this.likes = list;
     }
 
     public String getLastName() {

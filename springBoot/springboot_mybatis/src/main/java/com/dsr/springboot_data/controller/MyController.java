@@ -16,10 +16,11 @@ import java.util.Map;
 public class MyController {
     @Autowired
     EmpMapper mapper;
+
     @RequestMapping("/getEmp")
-    public Emp  getEmp(String id){
+    public Emp getEmp(String id) {
         Emp empById = mapper.getEmpById(Integer.parseInt(id));
-        List<Emp> list=new ArrayList<>();
+        List<Emp> list = new ArrayList<>();
         System.out.println(id);
         list.add(empById);
         return empById;

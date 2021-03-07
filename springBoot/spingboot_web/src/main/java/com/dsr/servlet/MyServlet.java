@@ -21,10 +21,11 @@ public class MyServlet extends HttpServlet {
         req.getSession();
         req.getCookies();
         PrintWriter writer = resp.getWriter();
-        writer.write("总共请求次数："+ MyListener.totalRequest );
+        writer.write("总共请求次数：" + MyListener.totalRequest);
         writer.close();
-        System.out.println("servlet 3.0"+req.getParameter("name"));
-}
+        System.out.println("servlet 3.0" + req.getParameter("name"));
+    }
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         super.doPost(req, resp);

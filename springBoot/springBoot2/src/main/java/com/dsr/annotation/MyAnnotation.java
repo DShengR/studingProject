@@ -10,7 +10,10 @@ import java.lang.annotation.Target;
 public @interface MyAnnotation {
 
     public String name() default "";
+
     public int age() default 0;
-    public Class<?> type() ;
+
+    public Class<?> type();
+
     public Class<?>[] types() default {};
 }
